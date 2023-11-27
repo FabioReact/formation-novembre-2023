@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Hero } from "../types/hero";
+import HeroCard from "../components/HeroCard";
 
 const arrayOfLetters: string[] = [];
 for (let i = 97; i <= 122; i++) {
@@ -8,6 +10,7 @@ for (let i = 97; i <= 122; i++) {
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState<string>("a");
+  const [heroes, setHeroes] = useState<Hero[]>([])
   useEffect(() => {
     console.log("Premier rendu de Heroes - useEffect");
   }, []);
@@ -20,7 +23,7 @@ const Heroes = () => {
     fetch(`http://localhost:4000/heroes?name_like=^${selectedLetter}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setHeroes(data)
       })
       .catch((e) => {
         console.error(e);
@@ -39,6 +42,9 @@ const Heroes = () => {
         ))}
       </ul>
       <p>Vous avez cliqué sur: {selectedLetter}</p>
+      <div>
+        {heroes.map(hero => <HeroCard key={hero.id} hero={hero} />)}
+      </div>
     </section>
   );
 };
