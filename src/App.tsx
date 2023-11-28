@@ -36,9 +36,9 @@ function App() {
         Formation React
       </h1>
       <h2>Ambient-IT</h2>
-      <button onClick={() => setShowLearnUseEffect(b => !b)}>Show/Hide</button>
+      {/* <button onClick={() => setShowLearnUseEffect(b => !b)}>Show/Hide</button>
       {showLearnUseEffect ? <LearnUseEffect /> : null}
-      {/* <Paragraph content="Hello React" color="blue">
+      <Paragraph content="Hello React" color="blue">
         <span>with Fabio</span>
       </Paragraph>
       <MyForm buttonFunction={onClickCallback} />
@@ -49,8 +49,8 @@ function App() {
       <div>
         <p>{ connected ? 'Connecté' : 'Non connecté'}</p>
         <button onClick={logCallback}>Login/Logout</button>
-      </div>
-      <Heroes /> */}
+      </div> */}
+      <Heroes />
     </>
   );
 }

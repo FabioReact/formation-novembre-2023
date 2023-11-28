@@ -10,40 +10,42 @@ for (let i = 97; i <= 122; i++) {
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState<string>("a");
-  const [heroes, setHeroes] = useState<Hero[]>([])
-  useEffect(() => {
-    console.log("Premier rendu de Heroes - useEffect");
-  }, []);
+  const [heroes, setHeroes] = useState<Hero[]>([]);
 
   useEffect(() => {
     // Ici, je peux executer des fonctions contenant des effets de bord
-    console.log(
-      `Premier rendu de Heroes, ou mise à jour de selectedLetter ${selectedLetter} - useEffect [selectedLetter]`
-    );
-    fetch(`http://localhost:4000/heroes?name_like=^${selectedLetter}`)
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch(`http://localhost:4000/heroes?name_like=^${selectedLetter}`, {
+      signal, // signal: signal
+    })
       .then((response) => response.json())
       .then((data) => {
-        setHeroes(data)
+        setHeroes(data);
       })
       .catch((e) => {
         console.error(e);
       });
+    return () => {
+      controller.abort();
+    };
   }, [selectedLetter]);
   // Fonction pure
   // Sans effet de bord
   return (
     <section>
       <h1>Heroes List</h1>
-      <ul>
+      <ul className="flex justify-center gap-2 uppercase font-semibold text-xl my-4">
         {arrayOfLetters.map((letter) => (
-          <li key={letter} onClick={() => setSelectedLetter(letter)}>
+          <li key={letter} className={letter === selectedLetter ? 'text-red-600 cursor-pointer' : 'cursor-pointer'} onClick={() => setSelectedLetter(letter)}>
             {letter}
           </li>
         ))}
       </ul>
-      <p>Vous avez cliqué sur: {selectedLetter}</p>
       <div>
-        {heroes.map(hero => <HeroCard key={hero.id} hero={hero} />)}
+        {heroes.map((hero) => (
+          <HeroCard key={hero.id} hero={hero} />
+        ))}
       </div>
     </section>
   );
