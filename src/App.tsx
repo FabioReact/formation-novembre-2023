@@ -5,6 +5,32 @@ import MyForm from "./Form"; // import par defaut
 // import { Form as MyForm } from "./Form";
 import Heroes from "./pages/Heroes";
 import LearnUseEffect from "./pages/LearnUseEffect";
+import { Link, Outlet, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
+import Home from "./pages/Home";
+
+const Layout = () => {
+  return (
+    <>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/heroes">Heroes</Link>
+        <Link to="/learn-useeffect">UseEffect</Link>
+      </nav>
+      <Outlet />
+      <footer>Copyright Ambient-IT 2023</footer>
+    </>
+  )
+}
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="/heroes" element={<Heroes />} />
+      <Route path="/learn-useeffect" element={<LearnUseEffect />} />
+    </Route>
+  )
+)
 
 function App() {
   const headingStyle = {
@@ -31,27 +57,7 @@ function App() {
   const [showLearnUseEffect, setShowLearnUseEffect] = useState(true)
 
   return (
-    <>
-      <h1 style={headingStyle} className={classes.textCenter}>
-        Formation React
-      </h1>
-      <h2>Ambient-IT</h2>
-      {/* <button onClick={() => setShowLearnUseEffect(b => !b)}>Show/Hide</button>
-      {showLearnUseEffect ? <LearnUseEffect /> : null}
-      <Paragraph content="Hello React" color="blue">
-        <span>with Fabio</span>
-      </Paragraph>
-      <MyForm buttonFunction={onClickCallback} />
-      <div>
-        <p>Counter: {counter}</p>
-        <button onClick={increment}>Incrementer</button>
-      </div>
-      <div>
-        <p>{ connected ? 'Connecté' : 'Non connecté'}</p>
-        <button onClick={logCallback}>Login/Logout</button>
-      </div> */}
-      <Heroes />
-    </>
+    <RouterProvider router={router} />
   );
 }
 
