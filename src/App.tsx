@@ -4,6 +4,7 @@ import Paragraph from "./Paragraph";
 import MyForm from "./Form"; // import par defaut
 // import { Form as MyForm } from "./Form";
 import Heroes from "./pages/Heroes";
+import LearnUseEffect from "./pages/LearnUseEffect";
 
 function App() {
   const headingStyle = {
@@ -27,13 +28,17 @@ function App() {
     // console.log(counter);
   }
 
+  const [showLearnUseEffect, setShowLearnUseEffect] = useState(true)
+
   return (
     <>
       <h1 style={headingStyle} className={classes.textCenter}>
         Formation React
       </h1>
       <h2>Ambient-IT</h2>
-      <Paragraph content="Hello React" color="blue">
+      <button onClick={() => setShowLearnUseEffect(b => !b)}>Show/Hide</button>
+      {showLearnUseEffect ? <LearnUseEffect /> : null}
+      {/* <Paragraph content="Hello React" color="blue">
         <span>with Fabio</span>
       </Paragraph>
       <MyForm buttonFunction={onClickCallback} />
@@ -45,7 +50,7 @@ function App() {
         <p>{ connected ? 'Connecté' : 'Non connecté'}</p>
         <button onClick={logCallback}>Login/Logout</button>
       </div>
-      <Heroes />
+      <Heroes /> */}
     </>
   );
 }
