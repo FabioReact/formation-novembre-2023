@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Hero } from "../types/hero";
 import HeroCard from "../components/HeroCard";
+import Loading from "../components/Loading";
 
 const arrayOfLetters: string[] = [];
 for (let i = 97; i <= 122; i++) {
@@ -11,9 +12,12 @@ for (let i = 97; i <= 122; i++) {
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState<string>("a");
   const [heroes, setHeroes] = useState<Hero[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Ici, je peux executer des fonctions contenant des effets de bord
+    setLoading(true);
+    setHeroes([]);
     const controller = new AbortController();
     const signal = controller.signal;
     fetch(`http://localhost:4000/heroes?name_like=^${selectedLetter}`, {
@@ -22,6 +26,7 @@ const Heroes = () => {
       .then((response) => response.json())
       .then((data) => {
         setHeroes(data);
+        setLoading(false);
       })
       .catch((e) => {
         console.error(e);
@@ -30,23 +35,32 @@ const Heroes = () => {
       controller.abort();
     };
   }, [selectedLetter]);
-  // Fonction pure
-  // Sans effet de bord
+
   return (
     <section>
       <h1>Heroes List</h1>
       <ul className="flex justify-center gap-2 uppercase font-semibold text-xl my-4">
         {arrayOfLetters.map((letter) => (
-          <li key={letter} className={letter === selectedLetter ? 'text-red-600 cursor-pointer' : 'cursor-pointer'} onClick={() => setSelectedLetter(letter)}>
+          <li
+            key={letter}
+            className={
+              letter === selectedLetter
+                ? "text-red-600 cursor-pointer"
+                : "cursor-pointer"
+            }
+            onClick={() => setSelectedLetter(letter)}
+          >
             {letter}
           </li>
         ))}
       </ul>
-      <div>
-        {heroes.map((hero) => (
-          <HeroCard key={hero.id} hero={hero} />
-        ))}
-      </div>
+      <Loading isLoading={loading}>
+        <div>
+          {heroes.map((hero) => (
+            <HeroCard key={hero.id} hero={hero} />
+          ))}
+        </div>
+      </Loading>
     </section>
   );
 };

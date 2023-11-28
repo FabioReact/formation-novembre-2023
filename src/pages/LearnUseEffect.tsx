@@ -2,7 +2,10 @@ import { useEffect, useState } from "react"
 
 const LearnUseEffect = () => {
     const [counter, setCounter] = useState(0)
+    // Fonction pure -> Ici, je ne peux effectuer que des fonctions pures...
+    // ... donc sans effet de bord
     useEffect(() => {
+        // Je peux en revanche executer une fonction effet de bord dans les useEffect
         console.log('Premier rendu de LearnUseEffect - inside useEffect[]')
         return () => {
             console.log('Appelé lors de la destruction (unmount) du composant LearnUseEffect - return useEffect[]')
