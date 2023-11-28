@@ -12,6 +12,7 @@ import StylingComponent from './pages/StylingComponent'
 import Layout from './hoc/Layout'
 import SearchHeroes from './pages/SearchHeroes'
 import Register from './pages/Register'
+import Login from './pages/Login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path='/learn-usestate' element={<LearnUseState />} />
       <Route path='/styling' element={<StylingComponent />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/login' element={<Login />} />
     </Route>,
   ),
 )

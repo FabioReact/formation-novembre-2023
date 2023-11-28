@@ -14,6 +14,7 @@ const Layout = () => {
         <Link to='/learn-usestate'>UseState</Link>
         <Link to='/styling'>Styling</Link>
         <Link to='/register'>Register</Link>
+        <Link to='/login'>Login</Link>
       </nav>
       <Outlet />
       <footer>Copyright Ambient-IT 2023</footer>
