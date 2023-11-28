@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Hero } from '../types/hero'
+import { useState } from 'react'
 import Loading from '../components/Loading'
 import HeroesList from '../components/HeroesList'
+import { useGetHeroes } from '../hooks/useGetHeroes'
+
+// Créer un custom hook, useCounter, il va afficher dans la console, toute les secondes, un compteur incrementer de 1, on doit pouvoir freeze le compteur, ou le reinitialisé
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
@@ -11,30 +13,8 @@ for (let i = 97; i <= 122; i++) {
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState<string>('a')
-  const [heroes, setHeroes] = useState<Hero[]>([])
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    // Ici, je peux executer des fonctions contenant des effets de bord
-    setLoading(true)
-    setHeroes([])
-    const controller = new AbortController()
-    const signal = controller.signal
-    fetch(`http://localhost:4000/heroes?name_like=^${selectedLetter}`, {
-      signal, // signal: signal
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setHeroes(data)
-        setLoading(false)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-    return () => {
-      controller.abort()
-    }
-  }, [selectedLetter])
+  const { heroes, loading, error } = useGetHeroes(selectedLetter)
 
   return (
     <section>
@@ -53,6 +33,7 @@ const Heroes = () => {
       <Loading isLoading={loading}>
         <HeroesList heroes={heroes} />
       </Loading>
+      {error && <p>Sorry, looks like our API has been smashed!</p>}
     </section>
   )
 }

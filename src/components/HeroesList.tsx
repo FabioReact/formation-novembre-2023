@@ -7,7 +7,7 @@ type HeroesListProps = {
 
 const HeroesList = ({ heroes }: HeroesListProps) => {
   return (
-    <div className='flex justify-center gap-16'>
+    <div className='flex justify-center gap-16 flex-wrap'>
       {heroes.map((hero) => (
         <HeroCard key={hero.id} hero={hero} />
       ))}
