@@ -5,6 +5,7 @@ const Layout = () => {
     <>
       <nav className="flex justify-center gap-2">
         <Link to="/">Home</Link>
+        <Link to="/search">Search</Link>
         <Link to="/heroes">Heroes</Link>
         <Link to="/learn-useeffect">UseEffect</Link>
         <Link to="/learn-usestate">UseState</Link>
