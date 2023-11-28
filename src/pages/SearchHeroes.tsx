@@ -1,24 +1,38 @@
-import { useState } from "react";
+import { useRef, useState } from 'react'
+import { Hero } from '../types/hero'
+import HeroesList from '../components/HeroesList'
+import { searchHeroes } from '../api/heroes'
 
 const SearchHeroes = () => {
   // 1. Remplacer useState (etat controllé) par useRef (etat non controllé)
   // Lors du click du bouton "Search", afficher la liste des heroes correspondant à la recherche
+  const queryRef = useRef<HTMLInputElement>(null)
+  const [heroes, setHeroes] = useState<Hero[]>([])
 
-  // 2. Creer un composant (page) Login, input type email et input type password
-  // Les deux inputs devront etre controllés par useState
-  const [query, setQuery] = useState("");
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
+  const onSearchHandler = async () => {
+    const query = queryRef.current?.value || ''
+    // Factoriser nos differents appels API
+    // setLoading -> true
+    try {
+      const data = await searchHeroes(query)
+      if (data) {
+        setHeroes(data)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      // setLoading -> false
+    }
+  }
 
   return (
     <section>
       <h1>Search Heroes</h1>
-      <input type="text" onChange={onChangeHandler} value={query} />
-      <p>Vous avez tapé: {query}</p>
+      <button onClick={onSearchHandler}>Search</button>
+      <input type='text' ref={queryRef} />
+      <HeroesList heroes={heroes} />
     </section>
-  );
-};
+  )
+}
 
-export default SearchHeroes;
+export default SearchHeroes
