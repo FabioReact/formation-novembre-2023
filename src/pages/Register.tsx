@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-const Login = () => {
-  // Objectif. Creer un composant (page) Login, input type email et input type password
+const Register = () => {
+  // Objectif. Creer un composant (page) Register, input type email et input type password
   // Les deux inputs devront etre controllés par useState
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <section>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form onSubmit={onSubmitHandler}>
         <fieldset>
           <label htmlFor='email'>Email:</label>
@@ -35,10 +35,10 @@ const Login = () => {
             value={password}
           />
         </fieldset>
-        <button type='submit'>Login</button>
+        <button type='submit'>Register</button>
       </form>
     </section>
   )
 }
 
-export default Login
+export default Register

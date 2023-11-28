@@ -13,7 +13,7 @@ const Layout = () => {
         <Link to='/learn-useeffect'>UseEffect</Link>
         <Link to='/learn-usestate'>UseState</Link>
         <Link to='/styling'>Styling</Link>
-        <Link to='/login'>Login</Link>
+        <Link to='/register'>Register</Link>
       </nav>
       <Outlet />
       <footer>Copyright Ambient-IT 2023</footer>

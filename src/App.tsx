@@ -11,7 +11,7 @@ import LearnUseState from './pages/LearnUseState'
 import StylingComponent from './pages/StylingComponent'
 import Layout from './hoc/Layout'
 import SearchHeroes from './pages/SearchHeroes'
-import Login from './pages/Login'
+import Register from './pages/Register'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />
       <Route path='/learn-usestate' element={<LearnUseState />} />
       <Route path='/styling' element={<StylingComponent />} />
-      <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
     </Route>,
   ),
 )
