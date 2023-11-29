@@ -6,6 +6,7 @@ type AuthContextType = {
   accessToken: string
   email: string
   onLogin: (accessToken: string) => void
+  onLogout: () => void
 }
 
 const AuthContext = createContext<AuthContextType>(null!)
@@ -22,6 +23,12 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     setEmail(decoded.email)
   }
 
+  const onLogout = () => {
+    setConnected(false)
+    setEmail('')
+    setAccessToken('')
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -29,6 +36,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
         accessToken,
         connected,
         onLogin,
+        onLogout,
       }}
     >
       {children}
