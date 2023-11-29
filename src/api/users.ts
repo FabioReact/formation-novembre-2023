@@ -1,4 +1,4 @@
-export const registerUser = (email: string, password: string) => {
+export const registerUser = (email: string, password: string): Promise<{ accessToken: string }> => {
   return fetch('http://localhost:4000/register', {
     method: 'POST',
     headers: {
@@ -18,5 +18,6 @@ export const registerUser = (email: string, password: string) => {
     })
     .catch((error) => {
       console.error(error)
+      throw new Error('Register User Error')
     })
 }

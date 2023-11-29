@@ -1,5 +1,7 @@
 import { useReducer } from 'react'
 import { registerUser } from '../api/users'
+import { useAuthContext } from '../context/auth-context'
+import { useNavigate } from 'react-router-dom'
 
 enum ActionTypeEnum {
   updateEmail = 'updateEmail',
@@ -108,18 +110,21 @@ const Register = () => {
     updatePasswordConfirmation,
     verify,
   } = useRegistration()
+  const { onLogin } = useAuthContext()
+  const navigate = useNavigate()
 
-  const onSubmitHandler = (event: React.FormEvent) => {
+  const onSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault()
     console.log(email, password)
     verify()
     // Appel API
     if (!passwordError) {
-      registerUser(email, password)
+      const data = await registerUser(email, password)
       // Si 200
       // Stocker le token,
+      onLogin(data.accessToken)
       // Redirection vers /profile
-
+      navigate('/profile')
     }
     // Sinon, affiche erreur
   }
