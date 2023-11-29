@@ -17,6 +17,7 @@ import Counter from './pages/Counter'
 import { AuthContextProvider } from './context/auth-context'
 import Profile from './pages/Profile'
 import AuthRoute from './hoc/AuthRoute'
+import Battle from './pages/Battle'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='/heroes' element={<Heroes />} />
       <Route path='/search' element={<SearchHeroes />} />
+      <Route path='/battle' element={<Battle />} />
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />
       <Route path='/learn-usestate' element={<LearnUseState />} />
       <Route path='/register' element={<Register />} />
