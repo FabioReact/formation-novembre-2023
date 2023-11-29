@@ -13,6 +13,7 @@ import Layout from './hoc/Layout'
 import SearchHeroes from './pages/SearchHeroes'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Counter from './pages/Counter'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path='/styling' element={<StylingComponent />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/counter' element={<Counter />} />
     </Route>,
   ),
 )

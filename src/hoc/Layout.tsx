@@ -12,6 +12,7 @@ const Layout = () => {
         <Link to='/heroes'>Heroes</Link>
         <Link to='/learn-useeffect'>UseEffect</Link>
         <Link to='/learn-usestate'>UseState</Link>
+        <Link to='/counter'>UseCounter</Link>
         <Link to='/styling'>Styling</Link>
         <Link to='/register'>Register</Link>
         <Link to='/login'>Login</Link>
