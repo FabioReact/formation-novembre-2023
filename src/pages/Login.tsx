@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useAuthContext } from '../context/auth-context'
+import { loginUser } from '../api/users'
+import { useNavigate } from 'react-router-dom'
 
 type Inputs = {
   email: string
@@ -20,9 +23,16 @@ const Login = () => {
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
   })
-  const onSubmitHandler = (data: Inputs) => {
+
+  const { onLogin } = useAuthContext()
+  const navigate = useNavigate()
+
+  const onSubmitHandler = async (data: Inputs) => {
     // console.log(email, password)
     console.log(data)
+    const response = await loginUser(data.email, data.password)
+    onLogin(response.accessToken)
+    navigate('/profile')
   }
 
   return (
