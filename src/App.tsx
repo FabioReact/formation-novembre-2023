@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import Counter from './pages/Counter'
 import { AuthContextProvider } from './context/auth-context'
 import Profile from './pages/Profile'
+import AuthRoute from './hoc/AuthRoute'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,11 +26,14 @@ const router = createBrowserRouter(
       <Route path='/search' element={<SearchHeroes />} />
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />
       <Route path='/learn-usestate' element={<LearnUseState />} />
-      <Route path='/styling' element={<StylingComponent />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
       <Route path='/counter' element={<Counter />} />
-      <Route path='/profile' element={<Profile />} />
+      <Route path='/styling' element={<StylingComponent />} />
+      {/* <Route path='/profile' element={<AuthRoute><Profile /></AuthRoute>} /> */}
+      <Route element={<AuthRoute />}>
+        <Route path='/profile' element={<Profile />} />
+      </Route>
     </Route>,
   ),
 )
