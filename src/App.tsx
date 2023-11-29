@@ -18,6 +18,7 @@ import { AuthContextProvider } from './context/auth-context'
 import Profile from './pages/Profile'
 import AuthRoute from './hoc/AuthRoute'
 import Battle from './pages/Battle'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,11 +41,15 @@ const router = createBrowserRouter(
   ),
 )
 
+const queryClient = new QueryClient()
+
 function App() {
   return (
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </QueryClientProvider>
   )
 }
 
