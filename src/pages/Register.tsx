@@ -1,4 +1,5 @@
 import { useReducer } from 'react'
+import { registerUser } from '../api/users'
 
 enum ActionTypeEnum {
   updateEmail = 'updateEmail',
@@ -113,7 +114,13 @@ const Register = () => {
     console.log(email, password)
     verify()
     // Appel API
-    // Si 200, redirection
+    if (!passwordError) {
+      registerUser(email, password)
+      // Si 200
+      // Stocker le token,
+      // Redirection vers /profile
+
+    }
     // Sinon, affiche erreur
   }
 

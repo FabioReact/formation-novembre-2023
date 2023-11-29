@@ -14,6 +14,8 @@ import SearchHeroes from './pages/SearchHeroes'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Counter from './pages/Counter'
+import { AuthContextProvider } from './context/auth-context'
+import Profile from './pages/Profile'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,12 +29,17 @@ const router = createBrowserRouter(
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
       <Route path='/counter' element={<Counter />} />
+      <Route path='/profile' element={<Profile />} />
     </Route>,
   ),
 )
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  )
 }
 
 export default App
