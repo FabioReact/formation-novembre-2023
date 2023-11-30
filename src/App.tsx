@@ -20,6 +20,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // import Heroes from './pages/Heroes'
 import { Suspense, lazy } from 'react'
 import Spinner from './components/Spinner'
+import { heroDetailsLoader } from './pages/HeroDetails'
 
 const Heroes = lazy(() => import('./pages/Heroes'))
 const Counter = lazy(() => import('./pages/Counter'))
@@ -38,7 +39,12 @@ const router = createBrowserRouter(
           </Suspense>
         }
       />
-      <Route path='/heroes/:id' element={<HeroDetails />} />
+      <Route
+        path='/heroes/:id'
+        loader={heroDetailsLoader}
+        errorElement={<div>Oops, we have a problem</div>}
+        element={<HeroDetails />}
+      />
       <Route path='/search' element={<SearchHeroes />} />
       <Route path='/battle' element={<Battle />} />
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />
