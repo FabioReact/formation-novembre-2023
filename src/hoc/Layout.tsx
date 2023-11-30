@@ -53,6 +53,9 @@ const Layout = () => {
         <NavLink className={getActiveClassName} to='/styling'>
           Styling
         </NavLink>
+        <NavLink className={getActiveClassName} to='/optimisations'>
+          Optimiations
+        </NavLink>
         {elements}
       </nav>
       <Outlet />

@@ -23,6 +23,7 @@ import Spinner from './components/Spinner'
 
 const Heroes = lazy(() => import('./pages/Heroes'))
 const Counter = lazy(() => import('./pages/Counter'))
+const Optimisations = lazy(() => import('./pages/Optimisations'))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />} />
       <Route path='/counter' element={<Counter />} />
       <Route path='/styling' element={<StylingComponent />} />
+      <Route path='/optimisations' element={<Optimisations />} />
       {/* <Route path='/profile' element={<AuthRoute><Profile /></AuthRoute>} /> */}
       <Route element={<AuthRoute />}>
         <Route path='/profile' element={<Profile />} />
