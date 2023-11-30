@@ -1,9 +1,8 @@
 import Loading from '../components/Loading'
 import HeroesList from '../components/HeroesList'
-import { useQuery } from '@tanstack/react-query'
-import { searchHeroesByFirstLetter } from '../api/heroes'
 import Title from '../components/Title'
 import { Link, useSearchParams } from 'react-router-dom'
+import { useGetHeroesByLetterQuery } from '../redux/services/heroes'
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
@@ -14,14 +13,7 @@ const Heroes = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedLetter = searchParams.get('q') || 'a'
 
-  const {
-    data: heroes,
-    isFetching,
-    isError,
-  } = useQuery({
-    queryKey: ['heroes', selectedLetter],
-    queryFn: () => searchHeroesByFirstLetter(selectedLetter),
-  })
+  const { data: heroes, isFetching, isError } = useGetHeroesByLetterQuery(selectedLetter)
 
   // A -> isLoading = true, isFetching = true
   // M -> isLoading = true, isFetching = true

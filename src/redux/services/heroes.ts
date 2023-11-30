@@ -9,9 +9,17 @@ export const heroesApi = createApi({
     getHeroById: builder.query<Hero, string>({
       query: (id) => `/${id}`,
     }),
+    getHeroesByLetter: builder.query<Hero[], string>({
+      query: (letter) => `?name_like=^${letter}`,
+    }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetHeroByIdQuery, useLazyGetHeroByIdQuery } = heroesApi
+export const {
+  useGetHeroByIdQuery,
+  useLazyGetHeroByIdQuery,
+  useGetHeroesByLetterQuery,
+  useLazyGetHeroesByLetterQuery,
+} = heroesApi
