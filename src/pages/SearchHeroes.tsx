@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Hero } from '../types/hero'
 import HeroesList from '../components/HeroesList'
 import { searchHeroes } from '../api/heroes'
+import Title from '../components/Title'
 
 const SearchHeroes = () => {
   // 1. Remplacer useState (etat controllé) par useRef (etat non controllé)
@@ -27,7 +28,7 @@ const SearchHeroes = () => {
 
   return (
     <section>
-      <h1>Search Heroes</h1>
+      <Title>Search Heroes</Title>
       <button onClick={onSearchHandler}>Search</button>
       <input type='text' ref={queryRef} />
       <HeroesList heroes={heroes} />

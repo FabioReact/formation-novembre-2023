@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button, .btn, button[type=submit] {
+    background-color: black;
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1.25rem;
+}
