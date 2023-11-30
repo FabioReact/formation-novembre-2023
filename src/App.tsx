@@ -1,4 +1,3 @@
-import Heroes from './pages/Heroes'
 import LearnUseEffect from './pages/LearnUseEffect'
 import {
   Route,
@@ -13,18 +12,30 @@ import Layout from './hoc/Layout'
 import SearchHeroes from './pages/SearchHeroes'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Counter from './pages/Counter'
 import { AuthContextProvider } from './context/auth-context'
 import Profile from './pages/Profile'
 import AuthRoute from './hoc/AuthRoute'
 import Battle from './pages/Battle'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+// import Heroes from './pages/Heroes'
+import { Suspense, lazy } from 'react'
+import Spinner from './components/Spinner'
+
+const Heroes = lazy(() => import('./pages/Heroes'))
+const Counter = lazy(() => import('./pages/Counter'))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path='/heroes' element={<Heroes />} />
+      <Route
+        path='/heroes'
+        element={
+          <Suspense fallback={<div>Loading Heroes...</div>}>
+            <Heroes />
+          </Suspense>
+        }
+      />
       <Route path='/search' element={<SearchHeroes />} />
       <Route path='/battle' element={<Battle />} />
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />
@@ -47,7 +58,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
-        <RouterProvider router={router} />
+        <Suspense fallback={<Spinner />}>
+          <RouterProvider router={router} />
+        </Suspense>
       </AuthContextProvider>
     </QueryClientProvider>
   )
