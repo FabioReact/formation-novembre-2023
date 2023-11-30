@@ -24,6 +24,7 @@ import Spinner from './components/Spinner'
 const Heroes = lazy(() => import('./pages/Heroes'))
 const Counter = lazy(() => import('./pages/Counter'))
 const Optimisations = lazy(() => import('./pages/Optimisations'))
+const HeroDetails = lazy(() => import('./pages/HeroDetails'))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
           </Suspense>
         }
       />
+      <Route path='/heroes/:id' element={<HeroDetails />} />
       <Route path='/search' element={<SearchHeroes />} />
       <Route path='/battle' element={<Battle />} />
       <Route path='/learn-useeffect' element={<LearnUseEffect />} />

@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import Loading from '../components/Loading'
 import HeroesList from '../components/HeroesList'
 import { useQuery } from '@tanstack/react-query'
 import { searchHeroesByFirstLetter } from '../api/heroes'
 import Title from '../components/Title'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
@@ -49,7 +48,14 @@ const Heroes = () => {
         ))}
       </ul>
       <Loading isLoading={isFetching}>
-        {heroes ? <HeroesList heroes={heroes} /> : <p>No Data</p>}
+        {heroes ? (
+          <HeroesList
+            render={(item: React.ReactNode, id: number) => <Link to={`${id}`}>{item}</Link>}
+            heroes={heroes}
+          />
+        ) : (
+          <p>No Data</p>
+        )}
       </Loading>
       {isError && <p>Sorry, looks like our API has been smashed!</p>}
     </section>
