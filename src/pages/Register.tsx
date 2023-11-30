@@ -1,8 +1,9 @@
 import { useReducer } from 'react'
 import { registerUser } from '../api/users'
-import { useAuthContext } from '../context/auth-context'
 import { useNavigate } from 'react-router-dom'
 import Title from '../components/Title'
+import { useDispatch } from 'react-redux'
+import { login } from '../redux/reducers/authSlice'
 
 enum ActionTypeEnum {
   updateEmail = 'updateEmail',
@@ -111,7 +112,8 @@ const Register = () => {
     updatePasswordConfirmation,
     verify,
   } = useRegistration()
-  const { onLogin } = useAuthContext()
+  // const { onLogin } = useAuthContext()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const onSubmitHandler = async (event: React.FormEvent) => {
@@ -123,7 +125,8 @@ const Register = () => {
       const data = await registerUser(email, password)
       // Si 200
       // Stocker le token,
-      onLogin(data.accessToken)
+      // onLogin(data.accessToken)
+      dispatch(login(data.accessToken))
       // Redirection vers /profile
       navigate('/profile')
     }

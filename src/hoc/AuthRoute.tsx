@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuthContext } from '../context/auth-context'
+import { useAppSelector } from '../redux/hooks'
 
 const AuthRoute = () => {
-  const { connected } = useAuthContext()
+  const connected = useAppSelector((state) => state.auth.connected)
   if (!connected) return <Navigate to='/login' replace={true} />
   return <Outlet />
 }

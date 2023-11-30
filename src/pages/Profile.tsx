@@ -1,13 +1,17 @@
-import { useAuthContext } from '../context/auth-context'
 import Title from '../components/Title'
+import { useDispatch } from 'react-redux'
+import { useAppSelector } from '../redux/hooks'
+import { logout } from '../redux/reducers/authSlice'
 
 const Profile = () => {
-  const { accessToken, onLogout } = useAuthContext()
+  // const { onLogout } = useAuthContext()
+  const accessToken = useAppSelector((state) => state.auth.accessToken)
+  const dispatch = useDispatch()
   return (
     <section>
       <Title>Profile</Title>
       <p>Access token: {accessToken}</p>
-      <button onClick={onLogout}>Logout</button>
+      <button onClick={() => dispatch(logout())}>Logout</button>
     </section>
   )
 }
