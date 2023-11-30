@@ -1,11 +1,5 @@
 import { useState, memo, useCallback, useMemo } from 'react'
-
-const Title = memo(({ children }: { children: React.ReactNode }) => {
-  console.log('Render de Title')
-  return (
-    <h1 className='uppercase text-center text-5xl tracking-widest font-thin my-8'>{children}</h1>
-  )
-})
+import Title from '../components/Title';
 
 const Button = memo(({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => {
   console.log('Render de button', children)

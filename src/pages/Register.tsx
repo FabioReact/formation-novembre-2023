@@ -2,6 +2,7 @@ import { useReducer } from 'react'
 import { registerUser } from '../api/users'
 import { useAuthContext } from '../context/auth-context'
 import { useNavigate } from 'react-router-dom'
+import Title from '../components/Title'
 
 enum ActionTypeEnum {
   updateEmail = 'updateEmail',
@@ -131,7 +132,7 @@ const Register = () => {
 
   return (
     <section>
-      <h1>Register</h1>
+      <Title>Register</Title>
       <form onSubmit={onSubmitHandler}>
         <fieldset>
           <label htmlFor='email'>Email:</label>

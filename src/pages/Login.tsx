@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { useAuthContext } from '../context/auth-context'
 import { loginUser } from '../api/users'
 import { useNavigate } from 'react-router-dom'
+import Title from '../components/Title'
 
 type Inputs = {
   email: string
@@ -37,7 +38,7 @@ const Login = () => {
 
   return (
     <section>
-      <h1>Login</h1>
+      <Title>Login</Title>
       <form onSubmit={handleSubmit(onSubmitHandler)}>
         <fieldset>
           <label htmlFor='email'>Email:</label>

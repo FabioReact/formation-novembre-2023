@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Title from '../components/Title'
 
 const LearnUseState = () => {
   const [counter, setCounter] = useState(0);
@@ -11,7 +12,7 @@ const LearnUseState = () => {
 
   return (
     <section>
-      <h1>Learn useState</h1>
+      <Title>Learn useState</Title>
       <div>
         <p>Counter: {counter}</p>
         <button onClick={increment}>Increment by 2</button>

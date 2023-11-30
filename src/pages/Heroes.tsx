@@ -3,6 +3,7 @@ import Loading from '../components/Loading'
 import HeroesList from '../components/HeroesList'
 import { useQuery } from '@tanstack/react-query'
 import { searchHeroesByFirstLetter } from '../api/heroes'
+import Title from '../components/Title'
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
@@ -27,7 +28,7 @@ const Heroes = () => {
 
   return (
     <section>
-      <h1>Heroes List</h1>
+      <Title>Heroes List</Title>
       <ul className='flex justify-center gap-2 uppercase font-semibold text-xl my-4'>
         {arrayOfLetters.map((letter) => (
           <li

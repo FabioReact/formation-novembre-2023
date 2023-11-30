@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { searchHeroes } from '../api/heroes'
 import { Hero } from '../types/hero'
 import HeroCard from '../components/HeroCard'
+import Title from '../components/Title'
 
 type SelectPlayerProps = {
   label: string
@@ -58,7 +59,7 @@ const Battle = () => {
   }
   return (
     <section>
-      <h1>Battle</h1>
+      <Title>Battle</Title>
       <div className='flex justify-center gap-24'>
         <SelectPlayer label='One' selectPlayer={selectPlayerOne} />
         <SelectPlayer label='Two' selectPlayer={selectPlayerTwo} />
