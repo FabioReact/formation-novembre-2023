@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, NavLinkProps } from 'react-router-dom'
 import { useAuthContext } from '../context/auth-context'
 
 // High Order Component -> Composant d'ordre supérieur
@@ -6,7 +6,9 @@ import { useAuthContext } from '../context/auth-context'
 
 const Layout = () => {
   const { connected, onLogout } = useAuthContext()
-  const getActiveClassName = ({ isActive }: any) => (isActive ? 'text-red-600' : '')
+  // (props: NavLinkRenderProps) => string | undefined) | undefined
+  const getActiveClassName: NavLinkProps['className'] = ({ isActive }) =>
+    isActive ? 'text-red-600' : ''
   let elements
   if (connected) {
     elements = (
@@ -54,7 +56,7 @@ const Layout = () => {
           Styling
         </NavLink>
         <NavLink className={getActiveClassName} to='/optimisations'>
-          Optimiations
+          Optimisations
         </NavLink>
         {elements}
       </nav>
