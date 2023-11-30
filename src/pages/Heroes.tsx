@@ -4,6 +4,7 @@ import HeroesList from '../components/HeroesList'
 import { useQuery } from '@tanstack/react-query'
 import { searchHeroesByFirstLetter } from '../api/heroes'
 import Title from '../components/Title'
+import { useSearchParams } from 'react-router-dom'
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
@@ -11,7 +12,8 @@ for (let i = 97; i <= 122; i++) {
 }
 
 const Heroes = () => {
-  const [selectedLetter, setSelectedLetter] = useState<string>('a')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const selectedLetter = searchParams.get('q') || 'a'
 
   const {
     data: heroes,
@@ -26,6 +28,12 @@ const Heroes = () => {
   // M -> isLoading = true, isFetching = true
   // A -> isLoading = false, isFetching = true
 
+  const onClickLetter = (letter: string) => {
+    setSearchParams({
+      q: letter,
+    })
+  }
+
   return (
     <section>
       <Title>Heroes List</Title>
@@ -34,7 +42,7 @@ const Heroes = () => {
           <li
             key={letter}
             className={letter === selectedLetter ? 'text-red-600 cursor-pointer' : 'cursor-pointer'}
-            onClick={() => setSelectedLetter(letter)}
+            onClick={() => onClickLetter(letter)}
           >
             {letter}
           </li>
