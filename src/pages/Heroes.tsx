@@ -1,20 +1,29 @@
 import { useState } from 'react'
 import Loading from '../components/Loading'
 import HeroesList from '../components/HeroesList'
-import { useGetHeroes } from '../hooks/useGetHeroes'
-
-// Créer un custom hook, useCounter, il va afficher dans la console, toute les secondes, un compteur incrementer de 1, on doit pouvoir freeze le compteur, ou le reinitialisé
+import { useQuery } from '@tanstack/react-query'
+import { searchHeroesByFirstLetter } from '../api/heroes'
 
 const arrayOfLetters: string[] = []
 for (let i = 97; i <= 122; i++) {
   arrayOfLetters.push(String.fromCharCode(i))
 }
-// const letters: Array<string> = []
 
 const Heroes = () => {
   const [selectedLetter, setSelectedLetter] = useState<string>('a')
 
-  const { heroes, loading, error } = useGetHeroes(selectedLetter)
+  const {
+    data: heroes,
+    isFetching,
+    isError,
+  } = useQuery({
+    queryKey: ['heroes', selectedLetter],
+    queryFn: () => searchHeroesByFirstLetter(selectedLetter),
+  })
+
+  // A -> isLoading = true, isFetching = true
+  // M -> isLoading = true, isFetching = true
+  // A -> isLoading = false, isFetching = true
 
   return (
     <section>
@@ -30,10 +39,10 @@ const Heroes = () => {
           </li>
         ))}
       </ul>
-      <Loading isLoading={loading}>
-        <HeroesList heroes={heroes} />
+      <Loading isLoading={isFetching}>
+        {heroes ? <HeroesList heroes={heroes} /> : <p>No Data</p>}
       </Loading>
-      {error && <p>Sorry, looks like our API has been smashed!</p>}
+      {isError && <p>Sorry, looks like our API has been smashed!</p>}
     </section>
   )
 }
