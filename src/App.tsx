@@ -20,6 +20,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // import Heroes from './pages/Heroes'
 import { Suspense, lazy } from 'react'
 import Spinner from './components/Spinner'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 const Heroes = lazy(() => import('./pages/Heroes'))
 const Counter = lazy(() => import('./pages/Counter'))
@@ -63,7 +65,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <Suspense fallback={<Spinner />}>
-          <RouterProvider router={router} />
+          <Provider store={store}>
+            <RouterProvider router={router} />
+          </Provider>
         </Suspense>
       </AuthContextProvider>
     </QueryClientProvider>
